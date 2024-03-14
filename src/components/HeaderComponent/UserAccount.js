@@ -5,7 +5,8 @@ import style from './HeaderComponent.module.scss'
 import classNames from 'classnames/bind';
 import { Popover } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCircleQuestion, faGear, faLayerGroup, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion, faGear, faLayerGroup, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 const cx = classNames.bind(style)
 
 function UserAccount() {
@@ -17,22 +18,22 @@ function UserAccount() {
     const content = (
         <div className={cx('popover-content')}>
             <ul className={cx('account-menu')}>
-                <li className={cx('menu-item')}>
+                <Link href={'/admin'} className={cx('menu-item')}>
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faLocationDot} /></span>
-                    <span className={cx('menu-name')}>Thông tin tài khoản</span>
-                </li>
-                <li className={cx('menu-item')}>
+                    <span className={cx('menu-name')}>Trang cá nhân</span>
+                </Link>
+                <Link href={'/admin'} className={cx('menu-item')}>
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faLayerGroup} /></span>
-                    <span className={cx('menu-name')}>Thông tin tài khoản</span>
-                </li>
-                <li className={cx('menu-item')}>
+                    <span className={cx('menu-name')}>Trang quản trị</span>
+                </Link>
+                <Link href={'/admin'} className={cx('menu-item')}>
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faGear} /></span>
-                    <span className={cx('menu-name')}>Thông tin tài khoản</span>
-                </li>
-                <li className={cx('menu-item')}>
+                    <span className={cx('menu-name')}>Cài đặt tài khoản</span>
+                </Link>
+                <Link href={'/account/logout'} className={cx('menu-item')}>
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faCircleQuestion} /></span>
-                    <span className={cx('menu-name')}>Thông tin tài khoản</span>
-                </li>
+                    <span className={cx('menu-name')}>Đăng xuất</span>
+                </Link>
             </ul>
         </div>
     )

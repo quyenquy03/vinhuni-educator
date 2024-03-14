@@ -7,7 +7,6 @@ import style from './HeaderComponent.module.scss'
 const cx = classNames.bind(style)
 
 function HeaderSearch () {
-
     const [isLoading, setIsLoading] = useState(false)
     const [searchValue, setSearchValue] = useState('');
     const inputRef = useRef()

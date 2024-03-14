@@ -8,15 +8,15 @@ import SidebarComponent from "@/components/SidebarComponent";
 function AdminLayout({children}) {
     const [collapsed, setCollapsed] = useState(false);
     return (
-        <Layout>
-            <HeaderComponent collapsed={collapsed} onCollapsed={setCollapsed} />
+        <Layout style={{backgroundColor: '#f6f9ff'}}>
+            <HeaderComponent />
             <SidebarComponent collapsed={collapsed} />
             <Content
                 style={{
                     margin: `70px 10px 0 0`,
                     padding: '10px',
-                    minHeight: 1280,
-                    // background: '#ccc',
+                    minHeight: '100vh',
+                    // background: '#f6f9ff',
                     borderRadius: '4px',
                     marginLeft: collapsed ? '90px' : '260px',
                     transition: '.15s linear'

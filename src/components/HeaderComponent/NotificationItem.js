@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import style from './HeaderComponent.module.scss'
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

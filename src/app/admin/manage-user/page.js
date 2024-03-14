@@ -1,7 +1,11 @@
+import CardBlock from "@/components/CardBlock";
+
 function ManageUser() {
     return (
         <div>
-            ManageUser
+            <CardBlock header={'Quản lý người dùng'} className={'custom'}>
+                Manage User
+            </CardBlock>
         </div>
     )
 }

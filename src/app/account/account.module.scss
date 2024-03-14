@@ -1,0 +1,24 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(126 126 126 / 33%);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // --tw-backdrop-blur: blur(12px);
+}
