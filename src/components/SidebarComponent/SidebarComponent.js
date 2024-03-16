@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import style from './SidebarComponent.module.scss'
 import classNames from "classnames/bind";
+import ROUTES from '@/constants/routes';
 const cx = classNames.bind(style)
 
 function SidebarComponent({collapsed}) {
@@ -136,11 +137,12 @@ function SidebarComponent({collapsed}) {
     }
 
     const items = [
-        getItem(<Link href={'/admin/dashboard'}> Dashboard </Link>, '1', '/admin/dashboard', <MailOutlined />),
-        getItem('Quản lý thông tin chung', '3', '/admin/manage-general', <AppstoreOutlined />, [
-            getItem(<Link href={'/admin/manage-post/list-post'}> Quản lý ngành học </Link>, '3-1', '/admin/manage-post/list-post'),
-            getItem(<Link href={'/admin/manage-post/create-post'}> Quản lý khóa học </Link>, '3-2', '/admin/manage-post/create-post'),
-            getItem(<Link href={'/admin/manage-post/update-post'}> Chương trình đào tạo</Link>, '3-3', '/admin/manage-post/update-post'),
+        getItem(<Link href={ROUTES.ADMIN_DASHBOARD}> Dashboard </Link>, '1', ROUTES.ADMIN_DASHBOARD, <MailOutlined />),
+        getItem('Quản lý thông tin chung', '3', ROUTES.ADMIN_MANAGE_GENERAL, <AppstoreOutlined />, [
+            getItem(<Link href={ROUTES.ADMIN_MANAGE_TRAINING_COURSE}> Khóa học và Ngành học </Link>, '3-1', ROUTES.ADMIN_MANAGE_TRAINING_COURSE),
+            getItem(<Link href={ROUTES.ADMIN_MANAGE_TRAINING_PROGRAM}> Chương trình đào tạo</Link>, '3-2', ROUTES.ADMIN_MANAGE_TRAINING_PROGRAM),
+            // getItem(<Link href={ROUTES.ADMIN_MANAGE_MAJOR}> Ngành học </Link>, '3-3', ROUTES.ADMIN_MANAGE_MAJOR),
+            getItem(<Link href={ROUTES.ADMIN_MANAGE_PRIMARY_CLASS}> Lớp học hành chính </Link>, '3-4', ROUTES.ADMIN_MANAGE_PRIMARY_CLASS),
         ]),
         getItem(<Link href={'/admin/manage-user'}> Quản lý người dùng </Link>, '2', '/admin/manage-user', <UsergroupAddOutlined />),
         

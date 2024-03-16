@@ -114,6 +114,17 @@ body::-webkit-scrollbar-thumb{
   border-radius: 50px;
 }
 
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+.ml-10px {
+  margin-left: 10px !important;
+}
+.ant-picker-outlined {
+  width: 100% !important;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

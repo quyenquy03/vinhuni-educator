@@ -11,6 +11,7 @@ import NotificationComponent from "./NotificationComponent";
 import MessageComponent from "./MessageComponent";
 import UserAccount from "./UserAccount";
 import Link from "next/link";
+import ROUTES from "@/constants/routes";
 const cx = classNames.bind(style)
 
 export default function HeaderComponent({collapsed, onCollapsed}) {
@@ -23,8 +24,8 @@ export default function HeaderComponent({collapsed, onCollapsed}) {
                 <Row style={{height: '60px'}} justify={'space-between'} align={'middle'}>
                     <Col span={8} >
                         <div className={cx("left-box")}>
-                            <Link href={'/'} className={cx('header-logo')}>
-                                <Image priority src={image.logoDHV} alt="logo" width={45} />
+                            <Link href={ROUTES.HOMEPAGE} className={cx('header-logo')}>
+                                <Image priority src={'/logo.png'} alt="logo" height={50} width={50} />
                                 <div className={cx("logo-name")}>
                                     <div className={cx("logo-name-1")}>VinhUni Educator</div>
                                     {/* <div className={cx("logo-name-2")}>Hệ thống thi trắc nghiệm</div> */}

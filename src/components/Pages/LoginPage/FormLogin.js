@@ -2,12 +2,16 @@
 import { Checkbox, Form, Input, Space } from 'antd';
 import classNames from 'classnames/bind';
 import style from './login.module.scss'
+import { useRouter } from 'next/navigation';
+import ROUTES from '@/constants/routes';
 const cx = classNames.bind(style)
 
 function FormLogin() {
-
+    const router = useRouter();
     const onFinish = async (values) => {
-        console.log('Success:', values);
+        // console.log('Success:', values);
+        // redirect('/admin/dashboard')
+        router.push(ROUTES.ADMIN_DASHBOARD)
     };
     const onFinishFailed = async (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -76,7 +80,7 @@ function FormLogin() {
                     <Form.Item
                         className={cx('form-submit')}
                     >
-                        <button onClick={() => handleSubmit()} className={cx('btn-login')} size='large' role='button'>Đăng nhập</button>
+                        <button  className={cx('btn-login')} size='large' role='button'>Đăng nhập</button>
                     </Form.Item>
                 </Form>
                 </div>
