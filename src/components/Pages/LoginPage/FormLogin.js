@@ -32,17 +32,17 @@ function FormLogin() {
                     <Form.Item
                         name="username"
                         rules={[
-                            {
-                                required: true,
-                                message: 'Tên tài khoản không được để trống',
-                            },
                             () => ({
                                 validator(_, value) {
-                                    if (value.trim() != '' && !value.includes(' ')) {
-                                        return Promise.resolve();
+                                    if (value) {
+                                        if(value.trim() != '' && !value.includes(' ')) {
+                                            return Promise.resolve();
+                                        } else {
+                                            return Promise.reject(new Error('Tên tài khoản không hợp lệ'));
+                                        }
                                     }
-                                        return Promise.reject(new Error('Tên tài khoản không hợp lệ'));
-                                    },
+                                    return Promise.reject(new Error('Tên tài khoản không được để trống'));
+                                }
                             }),
                         ]}
                         className={cx('form-input')}

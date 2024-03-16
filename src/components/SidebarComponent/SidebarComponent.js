@@ -166,18 +166,18 @@ function SidebarComponent({collapsed}) {
     const pathname = usePathname()
     const [openKey, setOpenKey] = useState(() => {
         const active = items.find(item => pathname.includes(item.link));
-        if(active.children) {
-            return active.key;
+        if(active?.children) {
+            return active?.key;
         }
         return null;
     })
     const [activeMenu, setActiveMenu] = useState(() => {
         const active = items.find(item => pathname.includes(item.link));
-        if(active.children) {
-            const activeItem = active.children.find(item => item.link == pathname);
-            return activeItem.key;
+        if(active?.children) {
+            const activeItem = active?.children.find(item => item.link == pathname);
+            return activeItem?.key;
         }
-        return active.key;
+        return active?.key;
     })
     return (
         <Sider 
