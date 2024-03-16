@@ -1,8 +1,11 @@
-function ManageMajors() {
+import CardBlock from "@/components/CardBlock";
+import ManageMajors from "@/components/Pages/ManageMajors";
+
+function Majors() {
     return (
-        <>
-            Quản lý ngành đào tạo
-        </>
+        <CardBlock className={'custom'}>
+            <ManageMajors />
+        </CardBlock>
     )
 }
-export default ManageMajors;
+export default Majors;

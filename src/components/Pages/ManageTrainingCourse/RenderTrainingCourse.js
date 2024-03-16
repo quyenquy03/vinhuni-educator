@@ -2,12 +2,9 @@
 import DeleteButton from "@/components/Button/DeleteButton";
 import EditButton from "@/components/Button/EditButton";
 import { Button, Col, Flex, Pagination, Row, Table, message } from "antd";
-import style from '../TrainingCourse.module.scss'
-import classNames from "classnames/bind";
 import ModalCreateTrainingCourse from "@/components/Modal/ModalTrainingCourse";
 import { useState } from "react";
 import { deleteTrainingCourse, getTrainingCourseById } from "@/actions";
-const cx = classNames.bind(style)
 const RenderTrainingCourseTable = ({data}) => {
     const [dataEdit, setDataEdit] = useState();
     const [action, setAction] = useState('create');
@@ -95,7 +92,7 @@ const RenderTrainingCourseTable = ({data}) => {
     
     return (
         <>
-            <Table loading={isLoading} className={cx("table-custom")} bordered columns={columns} dataSource={data} pagination={false} scroll={{ x: 800 }} />
+            <Table loading={isLoading} bordered columns={columns} dataSource={data} pagination={false} scroll={{ x: 800 }} />
             <Row className="mt-3" justify={'space-between'} gutter={[10, 10]}>
                 <Col sm={24} md={6}>
                     <Button onClick={handleCreate} className="bg-info font-weight-500 text-white" >Thêm mới</Button>

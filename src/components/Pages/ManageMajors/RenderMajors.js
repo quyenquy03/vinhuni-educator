@@ -1,8 +1,7 @@
 'use client'
 import DeleteButton from "@/components/Button/DeleteButton";
 import EditButton from "@/components/Button/EditButton";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Flex, Popconfirm, Table } from "antd";
+import {  Flex,  Table } from "antd";
 
 const RenderMajorsTable = ({data}) => {
     const columns = [

@@ -1,5 +1,5 @@
 import axios from "axios";
-import RenderTrainingCourseTable from "./RenderTable/RenderTrainingCourse";
+import RenderTrainingCourseTable from "./RenderTrainingCourse";
 
 const TableTrainingCourse = async() => {
     const res = await axios.get('https://65e720dc53d564627a8e0375.mockapi.io/api/TrainingCourse', {

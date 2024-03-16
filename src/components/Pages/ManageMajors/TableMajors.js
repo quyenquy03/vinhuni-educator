@@ -1,5 +1,5 @@
 import axios from "axios";
-import RenderMajorsTable from "./RenderTable/RenderMajors";
+import RenderMajorsTable from "./RenderMajors";
 
 const TableMajors = async () => {
     const res = await axios.get('https://65e720dc53d564627a8e0375.mockapi.io/api/Majors');

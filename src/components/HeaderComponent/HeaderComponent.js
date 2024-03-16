@@ -16,7 +16,7 @@ const cx = classNames.bind(style)
 
 export default function HeaderComponent({collapsed, onCollapsed}) {
 
-
+    console.log('re render navbar')
     return (
         <header className={cx('wrapper')}>
 
@@ -25,7 +25,7 @@ export default function HeaderComponent({collapsed, onCollapsed}) {
                     <Col span={8} >
                         <div className={cx("left-box")}>
                             <Link href={ROUTES.HOMEPAGE} className={cx('header-logo')}>
-                                <Image priority src={'/logo.png'} alt="logo" height={50} width={50} />
+                                <Image priority src={'/logo-test.png'} alt="logo" height={50} width={50} />
                                 <div className={cx("logo-name")}>
                                     <div className={cx("logo-name-1")}>VinhUni Educator</div>
                                     {/* <div className={cx("logo-name-2")}>Hệ thống thi trắc nghiệm</div> */}
