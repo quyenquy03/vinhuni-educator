@@ -1,0 +1,8 @@
+.btn-edit {
+    color: orange !important;
+    border-color: orange !important;
+
+    &:hover {
+        border-color: #999 !important;
+    }
+}

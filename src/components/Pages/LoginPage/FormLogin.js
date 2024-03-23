@@ -3,12 +3,18 @@ import { Checkbox, Form, Input, Space, message } from 'antd';
 
 import classNames from 'classnames/bind';
 import style from './login.module.scss'
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+import { useRouter } from 'next/navigation';
+import ROUTES from '@/constants/routes';
+>>>>>>> manage-general
 const cx = classNames.bind(style)
 
 function FormLogin() {
-
+    const router = useRouter();
     const onFinish = async (values) => {
+<<<<<<< HEAD
         console.log('Success:', values);
 =======
 import { useRouter } from 'next/navigation';
@@ -71,6 +77,11 @@ function FormLogin() {
         }
         // router.push(ROUTES.ADMIN_DASHBOARD)
 >>>>>>> Stashed changes
+=======
+        // console.log('Success:', values);
+        // redirect('/admin/dashboard')
+        router.push(ROUTES.ADMIN_DASHBOARD)
+>>>>>>> manage-general
     };
     const onFinishFailed = async (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -92,17 +103,17 @@ function FormLogin() {
                     <Form.Item
                         name="userName"
                         rules={[
-                            {
-                                required: true,
-                                message: 'Tên tài khoản không được để trống',
-                            },
                             () => ({
                                 validator(_, value) {
-                                    if (value.trim() != '' && !value.includes(' ')) {
-                                        return Promise.resolve();
+                                    if (value) {
+                                        if(value.trim() != '' && !value.includes(' ')) {
+                                            return Promise.resolve();
+                                        } else {
+                                            return Promise.reject(new Error('Tên tài khoản không hợp lệ'));
+                                        }
                                     }
-                                        return Promise.reject(new Error('Tên tài khoản không hợp lệ'));
-                                    },
+                                    return Promise.reject(new Error('Tên tài khoản không được để trống'));
+                                }
                             }),
                         ]}
                         className={cx('form-input')}
@@ -140,7 +151,7 @@ function FormLogin() {
                     <Form.Item
                         className={cx('form-submit')}
                     >
-                        <button onClick={() => handleSubmit()} className={cx('btn-login')} size='large' role='button'>Đăng nhập</button>
+                        <button  className={cx('btn-login')} size='large' role='button'>Đăng nhập</button>
                     </Form.Item>
                 </Form>
                 </div>
