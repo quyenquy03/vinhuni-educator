@@ -15,7 +15,10 @@ const cx = classNames.bind(style)
 
 export default function HeaderComponent({collapsed, onCollapsed}) {
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     return (
         <header className={cx('wrapper')}>
 

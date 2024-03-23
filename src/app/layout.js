@@ -5,6 +5,8 @@ import ReduxProvider from "@/components/ReduxProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import HeaderComponent from "@/components/HeaderComponent";
 import { StyledComponentRegistry } from "@/libs/AntRegistry";
+import AccountProvider from "@/components/AccountProvider";
+import { cookies } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,16 +16,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
-  
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')
   return (
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
           <StyledComponentRegistry>
-            {/* <HeaderComponent collapsed={collapsed} onCollapsed={setCollapsed} /> */}
-            {/* <HeaderComponent /> */}
-            {children}
+            <AccountProvider accessToken={accessToken?.value}>
+              {children}
+            </AccountProvider>
           </StyledComponentRegistry>
         </ReduxProvider>
       </body>

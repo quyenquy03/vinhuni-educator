@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://api.example.com'
+    baseURL: 'https://api.techschool.id.vn/api/'
 });
 // instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
