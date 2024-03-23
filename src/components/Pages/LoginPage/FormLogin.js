@@ -3,20 +3,20 @@ import { Checkbox, Form, Input, Space, message } from 'antd';
 
 import classNames from 'classnames/bind';
 import style from './login.module.scss'
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-import { useRouter } from 'next/navigation';
-import ROUTES from '@/constants/routes';
->>>>>>> manage-general
-const cx = classNames.bind(style)
+// <<<<<<< HEAD
+// <<<<<<< Updated upstream
+// =======
+// import { useRouter } from 'next/navigation';
+// import ROUTES from '@/constants/routes';
+// >>>>>>> manage-general
+// const cx = classNames.bind(style)
 
-function FormLogin() {
-    const router = useRouter();
-    const onFinish = async (values) => {
-<<<<<<< HEAD
-        console.log('Success:', values);
-=======
+// function FormLogin() {
+//     const router = useRouter();
+//     const onFinish = async (values) => {
+// <<<<<<< HEAD
+//         console.log('Success:', values);
+// =======
 import { useRouter } from 'next/navigation';
 import ROUTES from '@/constants/routes';
 import { loginAccount } from '@/actions/accountActions';
@@ -75,13 +75,6 @@ function FormLogin() {
                 content: 'Thông tin tài khoản hoặc mật khẩu không chính xác!',
             });
         }
-        // router.push(ROUTES.ADMIN_DASHBOARD)
->>>>>>> Stashed changes
-=======
-        // console.log('Success:', values);
-        // redirect('/admin/dashboard')
-        router.push(ROUTES.ADMIN_DASHBOARD)
->>>>>>> manage-general
     };
     const onFinishFailed = async (errorInfo) => {
         console.log('Failed:', errorInfo);

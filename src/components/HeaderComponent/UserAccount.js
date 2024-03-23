@@ -7,19 +7,12 @@ import { Popover, message, notification } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion, faGear, faLayerGroup, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 import ROUTES from '@/constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '@/actions/accountActions';
 import { setCurrentUser } from '@/redux/actions/accountAction';
 import { useRouter } from 'next/navigation';
 import { logoutBEServer, logoutNextServer } from '@/apiService';
->>>>>>> Stashed changes
-=======
-import ROUTES from '@/constants/routes';
->>>>>>> manage-general
 const cx = classNames.bind(style)
 
 function UserAccount() {
@@ -83,15 +76,7 @@ function UserAccount() {
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faGear} /></span>
                     <span className={cx('menu-name')}>Cài đặt tài khoản</span>
                 </Link>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-                <Link href={'/account/logout'} className={cx('menu-item')}>
-=======
                 <li onClick={handleLogout} className={cx('menu-item')}>
->>>>>>> Stashed changes
-=======
-                <Link href={ROUTES.LOGIN_PAGE} className={cx('menu-item')}>
->>>>>>> manage-general
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faCircleQuestion} /></span>
                     <span className={cx('menu-name')}>Đăng xuất</span>
                 </li>
