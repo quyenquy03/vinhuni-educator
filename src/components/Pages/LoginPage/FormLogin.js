@@ -1,96 +1,57 @@
 'use client'
-import { Checkbox, Form, Input, Space, message } from 'antd';
-
+import { Button, Checkbox, Form, Input, Space, Spin, message } from 'antd';
 import classNames from 'classnames/bind';
 import style from './login.module.scss'
-// <<<<<<< HEAD
-// <<<<<<< Updated upstream
-// =======
-// import { useRouter } from 'next/navigation';
-// import ROUTES from '@/constants/routes';
-// >>>>>>> manage-general
-// const cx = classNames.bind(style)
-
-// function FormLogin() {
-//     const router = useRouter();
-//     const onFinish = async (values) => {
-// <<<<<<< HEAD
-//         console.log('Success:', values);
-// =======
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import ROUTES from '@/constants/routes';
-import { loginAccount } from '@/actions/accountActions';
 import { useDispatch } from 'react-redux';
 import { setAccessToken } from '@/redux/actions/accountAction';
+import http from '@/libs/http';
+import { useEffect, useState } from 'react';
 const cx = classNames.bind(style)
-
 function FormLogin() {
     const router = useRouter();
+    const pathname = usePathname();
     const dispatch = useDispatch();
-    const [messageApi, contextHolder] = message.useMessage();
+    const [isLoading, setIsLoading] = useState(false);
+    const [loginType, setLoginType] = useState('normal');
     const onFinish = async (value) => {
-
-        const res = await fetch('https://api.techschool.id.vn/api/auth/login', {
-            credentials: 'include',
-            mode: 'cors',
-            method: 'POST',
-            body: JSON.stringify(value),
-            headers: {
-                "Content-Type" : "application/json",
-            }
-        }).then( res => res.json())
-
-        if(res.statusCode == 200) {
-            const resFromNext = await fetch('/api/auth', {
-                method: 'POST',
-                body: JSON.stringify(res),
-                headers: {
-                    "Content-Type" : "application/json"
-                }
-            }).then(async res => {
-                const payload = await res.json();
-                const data = {
-                    status: res.status,
-                    payload
-                }
-                return data;
+        setIsLoading(true);
+        try {
+            const api = loginType == 'normal' ? 'auth/login' : 'auth/login-sso';
+            const res = await http.post(api, value, {
+                credentials: 'include',
+                mode: 'cors',
             });
-            if(resFromNext.status == 200) {
-                messageApi.open({
-                    type: 'success',
-                    content: 'Đăng nhập thành công!',
+            if(res.statusCode == 200) {
+                const resFromNext = await http.post('/api/auth', res, {
+                    baseUrl: ''
                 });
-                dispatch(setAccessToken(res.data.accessToken));
-                router.push(ROUTES.ADMIN_DASHBOARD);
-            } else {
-                messageApi.open({
-                    type: 'success',
-                    content: 'Đăng nhập thất bại, vui lòng kiểm tra lại!',
-                });
+                if(resFromNext.status == 200) {
+                    message.success('Đăng nhập thành công');
+                    dispatch(setAccessToken(res.data.accessToken));
+                    router.push(ROUTES.ADMIN_DASHBOARD);
+                } else {
+                    message.error('Đăng nhập thất bại, vui lòng kiểm tra lại!')
+                }
             }
+            if(res.statusCode == 404) {
+                message.error('Thông tin tài khoản hoặc mật khẩu không chính xác!');
+            }
+        } catch(error) {
+            message.error('Hệ thống đang bị lỗi, vui lòng thử lại sau');
         }
-        if(res.statusCode == 404) {
-            messageApi.open({
-                type: 'error',
-                content: 'Thông tin tài khoản hoặc mật khẩu không chính xác!',
-            });
-        }
+        setIsLoading(false);
     };
-    const onFinishFailed = async (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
+    useEffect(() => {
+        pathname == ROUTES.LOGIN_PAGE ? setLoginType('normal') : setLoginType('sso');
+    }, [pathname])
     return (
         <div className={cx('body')}>
-            {contextHolder}
             <div className={cx('form-login')}>
                 <Form
                     name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
                     <Form.Item
@@ -123,10 +84,6 @@ function FormLogin() {
                                 required: true,
                                 message: 'Mật khẩu không được để trống',
                             },
-                            // {
-                            //     min: 6,
-                            //     message: 'Mật khẩu tối thiểu 6 kí tự'
-                            // }
                         ]}
                         className={cx('form-input')}
                     >
@@ -144,7 +101,7 @@ function FormLogin() {
                     <Form.Item
                         className={cx('form-submit')}
                     >
-                        <button  className={cx('btn-login')} size='large' role='button'>Đăng nhập</button>
+                        <Button loading={isLoading} className={cx('btn-login')} htmlType='submit' size='large' role='button'>Đăng nhập</Button>
                     </Form.Item>
                 </Form>
                 </div>

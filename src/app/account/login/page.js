@@ -1,4 +1,4 @@
-import LoginPageComponent from "@/components/Pages/LoginPage";
+import { LoginPageComponent } from "@/components/Pages/LoginPage";
 
 function LoginPage() {
 

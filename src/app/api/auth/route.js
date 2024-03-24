@@ -6,7 +6,7 @@ export async function POST(request) {
     if(res.statusCode != 200 || !accessToken) {
         return Response.json({res});
     } 
-    return Response.json({data}, {
+    return Response.json({data, status: 200}, {
         status: 200,
         headers: {
             'Set-cookie': `accessToken=${accessToken}; expires=${expires}; path=/; Secure; HttpOnly; `

@@ -4,8 +4,7 @@ import { useState } from 'react';
 import style from './HeaderComponent.module.scss'
 import classNames from 'classnames/bind';
 import { Popover } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faComment, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { BiSolidMessageRounded } from "react-icons/bi";
 import MessageItem from './MessageItem';
 const cx = classNames.bind(style)
 
@@ -44,7 +43,7 @@ function MessageComponent() {
             open={open}
             onOpenChange={handleOpenChange}
         >
-            <span className={cx('icon', 'ml-2')}><FontAwesomeIcon icon={faComment} /></span>
+            <span className={cx('icon', 'ml-2')}><BiSolidMessageRounded /></span>
         </Popover>
     )
 }

@@ -4,8 +4,7 @@ import { useState } from 'react';
 import style from './HeaderComponent.module.scss'
 import classNames from 'classnames/bind';
 import { Popover } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { BiSolidBellRing } from "react-icons/bi";
 import NotificationItem from './NotificationItem';
 const cx = classNames.bind(style)
 
@@ -44,7 +43,7 @@ function NotificationComponent() {
             open={open}
             onOpenChange={handleOpenChange}
         >
-            <span className={cx('icon', 'ml-2')}><FontAwesomeIcon icon={faBell} /></span>
+            <span className={cx('icon', 'ml-2')}><BiSolidBellRing /></span>
         </Popover>
     )
 }

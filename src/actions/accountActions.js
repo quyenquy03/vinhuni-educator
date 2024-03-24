@@ -1,33 +1,26 @@
 'use server'
 
+import http from "@/libs/http";
 import { cookies } from "next/headers";
 
 const cookieStore = cookies();
 const token = cookieStore.get('accessToken');
 const accessToken = token?.value;
 const logoutAccount = async () => {
-    const res = await fetch('https://api.techschool.id.vn/api/auth/logout', {
-        // credentials: 'include',
-        // mode: 'cors',
-        method: 'POST',
+    const res = await http.post('/auth/logout', null, {
         headers: {
-            "Content-Type" : "application/json",
             Authorization: `Bearer ${accessToken}`
         }
     })
-    return await res.json();
+    return res;
 }
 const getCurrentUser = async () => {
-    const res = await fetch('https://api.techschool.id.vn/api/account/me', {
-        credentials: 'include',
-        mode: 'cors',
-        method: 'GET',
+    const res = await http.get('/account/me', {
         headers: {
-            "Content-Type" : "application/json",
             Authorization: `Bearer ${accessToken}`
         }
     })
-    return await res.json();
+    return res;
 }
 
 export {

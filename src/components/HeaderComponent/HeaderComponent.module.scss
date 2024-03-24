@@ -43,14 +43,7 @@
         font-weight: 600;
         margin-left: 10px;
         text-align: center;
-        color: var(--primary-color);
-    }
-    .logo-name-2 {
-        font-size: 15px;
-        font-weight: 400;
-        margin-left: 10px;
-        text-align: center;
-        color: #111;
+        color: var(--text-color);
     }
 }
 
@@ -157,10 +150,11 @@
         justify-content: center;
         align-items: center;
         margin: 0 5px;
-        color: var(--text-color);
+        color: #555;
 
         &:hover {
             background-color: #e9e8e8;
+            color: #f27777;
         }
     }
 }
@@ -286,9 +280,6 @@
             display: block;
             text-align: center;
             color: var(--text-color);
-        }
-        .menu-name {
-            
         }
     }
 }

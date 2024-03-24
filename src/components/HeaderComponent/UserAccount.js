@@ -10,18 +10,20 @@ import Link from 'next/link';
 import ROUTES from '@/constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '@/actions/accountActions';
-import { setCurrentUser } from '@/redux/actions/accountAction';
+import { setAccessToken, setCurrentUser } from '@/redux/actions/accountAction';
 import { useRouter } from 'next/navigation';
 import { logoutBEServer, logoutNextServer } from '@/apiService';
 const cx = classNames.bind(style)
 
 function UserAccount() {
+
     const {accessToken} = useSelector(state => state.accountReducer);
     const [api, contextHolder] = notification.useNotification();
     const dispatch = useDispatch();
     const router = useRouter();
     const [currentAccount, setCurrentAccount] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         const fetchData = async() => {
             const res = await getCurrentUser();
@@ -48,6 +50,7 @@ function UserAccount() {
                 setIsLoading(false)
                 if(resFromNextServer.status == 200) {
                     message.success('Đã đăng xuất!');
+                    dispatch(setAccessToken(''));
                     router.push(ROUTES.LOGIN_PAGE);
                 }
             }
@@ -93,7 +96,7 @@ function UserAccount() {
         >
             {contextHolder}
             <div className={cx('account-box')}>
-                <span className={cx('account-name')}>Nguyen Ta Quyen</span>
+                <span className={cx('account-name')}>{`${currentAccount?.firstName} ${currentAccount?.lastName}`}</span>
                 <img className={cx('account-avatar')} src='https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg' alt="avt" />
             </div>
         </Popover>
