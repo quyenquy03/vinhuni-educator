@@ -3,19 +3,17 @@
 import { logoutBEServer, logoutNextServer } from "@/apiService";
 import ROUTES from "@/constants/routes";
 import { setAccessToken } from "@/redux/actions/accountAction";
-import { Modal, notification, message } from "antd";
+import { notification, message } from "antd";
 import { jwtDecode } from "jwt-decode";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const GetNewToken = ({accessToken}) => {
     const [token, setToken] = useState(accessToken);
     const dispatch = useDispatch();
-    const pathname = usePathname();
     const router = useRouter();
     const [api, contextHolder] = notification.useNotification();
-
     const handleGetNewToken = async () => {
         var dem = 0;
         try {
@@ -41,14 +39,12 @@ const GetNewToken = ({accessToken}) => {
                     })
                     dispatch(setAccessToken(res.data.accessToken));
                     setToken(res.data.accessToken);
-                    console.log('success')
                     break;
                 }
             } while(dem >0 && dem < 5)
             if(dem == 5) {
                 handleLogout();
             }
-            console.log('get new token');
         } catch(e) {
             api.error({
                 message: 'Đăng xuất thất bại',
@@ -76,45 +72,25 @@ const GetNewToken = ({accessToken}) => {
               });
         }
     }
-    
-    const loopCheckToken = () => {
-        const currentTime = Math.floor(Date.now() / 1000);
-        if(tokenExpried - currentTime < 100) {
+    useEffect(() => {
+        let interval = null;
+        if(token) {
+            const jwt = jwtDecode(token)
+            var tokenExpried =  jwt.exp;
+            interval = setInterval(() => {
+                const currentTime = Math.floor(Date.now() / 1000);
+                if(tokenExpried - currentTime < 100) {
+                    handleGetNewToken();
+                    tokenExpried += 300;
+                }
+            }, 50*1000);
+        } else {
             handleGetNewToken();
         }
-    }
-    useEffect(() => {
-        console.log(token)
-        if(!token) {
-            router.push(ROUTES.LOGIN_PAGE);
-        }
-        const jwt = jwtDecode(token)
-        const tokenExpried = new Date(jwt.exp);
-        console.log(tokenExpried)
-        const interval = setInterval(() => {
-            // const currentTime = Math.floor(Date.now() / 1000);
-            // if(tokenExpried - currentTime < 100) {
-            //     console.log('expried: ',tokenExpried)
-            //     console.log('current: ',currentTime)
-            //     console.log('expried - current: ',tokenExpried-currentTime)
-            //     // handleGetNewToken();
-            // }
-        }, 50*1000);
-
         () => {
             clearInterval(interval);
         }
-    },[token])
-
-    const content = (
-        <div>
-
-        </div>
-    )
-    return (
-        <div style={{textAlign: 'center'}}>
-            <button onClick={handleGetNewToken}>Change token</button>
-        </div>
-    )
+    },[])
+    return null
 }
 export default GetNewToken;
