@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.scss";
-import ReduxProvider from "@/components/ReduxProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import HeaderComponent from "@/components/HeaderComponent";
 import { StyledComponentRegistry } from "@/libs/AntRegistry";
@@ -14,18 +13,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
-  
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>
-          <StyledComponentRegistry>
-            {/* <HeaderComponent collapsed={collapsed} onCollapsed={setCollapsed} /> */}
-            {/* <HeaderComponent /> */}
-            {children}
-          </StyledComponentRegistry>
-        </ReduxProvider>
+        <StyledComponentRegistry>
+          {/* <HeaderComponent collapsed={collapsed} onCollapsed={setCollapsed} /> */}
+          {/* <HeaderComponent /> */}
+          {children}
+        </StyledComponentRegistry>
       </body>
     </html>
   );
