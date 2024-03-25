@@ -14,6 +14,7 @@ const GetNewToken = ({accessToken}) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const [api, contextHolder] = notification.useNotification();
+
     const handleGetNewToken = async () => {
         var dem = 0;
         try {
@@ -39,12 +40,14 @@ const GetNewToken = ({accessToken}) => {
                     })
                     dispatch(setAccessToken(res.data.accessToken));
                     setToken(res.data.accessToken);
+                    console.log('success')
                     break;
                 }
             } while(dem >0 && dem < 5)
             if(dem == 5) {
                 handleLogout();
             }
+            console.log('get new token');
         } catch(e) {
             api.error({
                 message: 'Đăng xuất thất bại',
@@ -72,6 +75,7 @@ const GetNewToken = ({accessToken}) => {
               });
         }
     }
+    
     useEffect(() => {
         let interval = null;
         if(token) {
@@ -90,7 +94,8 @@ const GetNewToken = ({accessToken}) => {
         () => {
             clearInterval(interval);
         }
-    },[])
-    return null
+    },[token])
+
+    return null;
 }
 export default GetNewToken;

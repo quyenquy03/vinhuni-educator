@@ -28,7 +28,7 @@ const request = async(method, url, options) => {
     })
     const data = await res.json();
     if(!res.ok) {
-        throw new HttpError(200, data);
+        throw data;
     }
     return data;
 }

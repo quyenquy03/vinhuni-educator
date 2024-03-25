@@ -16,14 +16,6 @@ const cx = classNames.bind(style)
 
 export default function HeaderComponent({collapsed, onCollapsed}) {
 
-// <<<<<<< HEAD
-// <<<<<<< Updated upstream
-
-// =======
-// >>>>>>> Stashed changes
-// =======
-//     console.log('re render navbar')
-// >>>>>>> manage-general
     return (
         <header className={cx('wrapper')}>
 
