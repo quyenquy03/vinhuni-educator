@@ -40,14 +40,13 @@ const GetNewToken = ({accessToken}) => {
                     })
                     dispatch(setAccessToken(res.data.accessToken));
                     setToken(res.data.accessToken);
-                    console.log('success')
                     break;
                 }
             } while(dem >0 && dem < 5)
             if(dem == 5) {
+                message.error('Phiên đăng nhập đã hết hạn, đăng nhập lại!');
                 handleLogout();
             }
-            console.log('get new token');
         } catch(e) {
             api.error({
                 message: 'Đăng xuất thất bại',
@@ -77,17 +76,20 @@ const GetNewToken = ({accessToken}) => {
     }
     
     useEffect(() => {
+        const accessTokenTime = process.env.ACCESS_TOKEN_TIME;
+        const loopCheckTokenTime = process.env.LOOP_CHECK_TOKEN_TIME;
+        const checkAccessTokenTime = process.env.CHECK_ACCESS_TOKEN_TIME_TOKEN_TIME;
         let interval = null;
         if(token) {
             const jwt = jwtDecode(token)
             var tokenExpried =  jwt.exp;
             interval = setInterval(() => {
                 const currentTime = Math.floor(Date.now() / 1000);
-                if(tokenExpried - currentTime < 100) {
+                if(tokenExpried - currentTime < checkAccessTokenTime) {
                     handleGetNewToken();
-                    tokenExpried += 300;
+                    tokenExpried += accessTokenTime;
                 }
-            }, 50*1000);
+            }, loopCheckTokenTime);
         } else {
             handleGetNewToken();
         }

@@ -14,13 +14,21 @@ const logoutAccount = async () => {
     })
     return res;
 }
-const getCurrentUser = async () => {
-    const res = await http.get('/account/me', {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
+const getCurrentUser = async (accessToken) => {
+    try {
+        const res = await http.get('/account/me', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        return res;
+    } catch(error) {
+        return {
+            status: 500,
+            message: 'Error from server'
         }
-    })
-    return res;
+    }
+    
 }
 
 export {

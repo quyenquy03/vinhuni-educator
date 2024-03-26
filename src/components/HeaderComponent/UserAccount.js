@@ -1,9 +1,9 @@
 
 'use client'
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import style from './HeaderComponent.module.scss'
 import classNames from 'classnames/bind';
-import { Popover, message, notification } from 'antd';
+import { Popover, Skeleton, message, notification } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion, faGear, faLayerGroup, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ import { getCurrentUser } from '@/actions/accountActions';
 import { setAccessToken, setCurrentUser } from '@/redux/actions/accountAction';
 import { useRouter } from 'next/navigation';
 import { logoutBEServer, logoutNextServer } from '@/apiService';
+import Image from 'next/image';
 const cx = classNames.bind(style)
 
 function UserAccount() {
@@ -21,33 +22,40 @@ function UserAccount() {
     const [api, contextHolder] = notification.useNotification();
     const dispatch = useDispatch();
     const router = useRouter();
-    const [currentAccount, setCurrentAccount] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
+    const [open, setOpen] = useState(false);
+    const [currentAccount, setCurrentAccount] = useState({
+        fullName : <Skeleton.Input style={{height: '14px'}} active={true} size={'small'} block={true} />,
+        avatar: '/user.png',
+        userName: <Skeleton.Input style={{height: '11px'}} active={true} size={'small'} block={true} />,
+        roles: ['Quản trị viên']
+    });
+    useLayoutEffect(() => {
         const fetchData = async() => {
-            const res = await getCurrentUser();
-            if(res.statusCode == 200 && res.data) {
-                setCurrentAccount(res.data)
-                dispatch(setCurrentUser(res.data));
+            if(accessToken) {
+                const res = await getCurrentUser(accessToken);
+                if(res.statusCode == 200 && res.data) {
+                    setCurrentAccount({
+                        fullName: `${res.data?.firstName} ${res.data?.lastName}`,
+                        avatar: res.data?.avatar ?? '/user.png',
+                        userName: res.data?.userName,
+                        roles: res.data?.roles
+                    })
+                    dispatch(setCurrentUser(res.data));
+                }
             }
         }
         fetchData();
     }, [accessToken])
 
-    const [open, setOpen] = useState(false);
     const handleOpenChange = (newOpen) => {
         setOpen(newOpen);
     };
 
     const handleLogout = async() => {
-        setIsLoading(true);
         try {
             const res = await logoutBEServer(accessToken)
-
             if(res.statusCode == 200 || res.statusCode == 401) {
                 const resFromNextServer = await logoutNextServer();
-                setIsLoading(false)
                 if(resFromNextServer.status == 200) {
                     message.success('Đã đăng xuất!');
                     dispatch(setAccessToken(''));
@@ -61,7 +69,6 @@ function UserAccount() {
                   'Hệ thống đang lỗi, vui lòng thử lại sau!',
               });
         }
-        setIsLoading(false);
     }
 
     const content = (
@@ -96,8 +103,18 @@ function UserAccount() {
         >
             {contextHolder}
             <div className={cx('account-box')}>
-                <span className={cx('account-name')}>{`${currentAccount?.firstName} ${currentAccount?.lastName}`}</span>
-                <img className={cx('account-avatar')} src='https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg' alt="avt" />
+                <Image
+                    alt="Logo"
+                    src={currentAccount?.avatar}
+                    className={cx('account-avatar')}
+                    radius="full"
+                    width={40}
+                    height={40}
+                />
+                <div>
+                    <span className={cx('account-name')}>{currentAccount?.fullName}</span>
+                    <span className={cx('account-username')}>{currentAccount?.userName}</span>
+                </div>
             </div>
         </Popover>
     )

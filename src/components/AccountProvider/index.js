@@ -8,8 +8,6 @@ const AccountProvider = ({accessToken, children}) => {
     useState(() => {
         dispatch(setAccessToken(accessToken));
     })
-    // useEffect(() => {
-    // },[accessToken])
     return (
         <>{children}</>
     )

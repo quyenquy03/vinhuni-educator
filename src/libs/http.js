@@ -27,9 +27,9 @@ const request = async(method, url, options) => {
         method
     })
     const data = await res.json();
-    if(!res.ok) {
-        throw data;
-    }
+    // if(!res.ok) {
+    //     throw data;
+    // }
     return data;
 }
 

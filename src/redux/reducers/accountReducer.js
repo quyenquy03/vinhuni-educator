@@ -3,7 +3,6 @@ import ACTION_TYPE from "@/constants/actionType";
 const account = {
     accessToken:'',
     currentUser: {},
-
 };
 
 const accountReducer = (state = account, action) => {

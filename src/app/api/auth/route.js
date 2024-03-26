@@ -1,8 +1,11 @@
+import { jwtDecode } from "jwt-decode";
+
 export async function POST(request) {
     const res = await request.json();
     const accessToken = res?.data?.accessToken;
     const data = res?.data;
-    const expires = (new Date(Date.now()+ 5*60*1000)).toUTCString();
+    
+    const expires = jwtDecode(accessToken).exp;
     if(res.statusCode != 200 || !accessToken) {
         return Response.json({res});
     } 

@@ -110,12 +110,12 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        border: 1px solid #ccc;
         padding: 2px;
         border-radius: 1000px;
         min-width: 200px;
-        justify-content: flex-end;
+        justify-content: flex-start;
         margin-left: 5px;
+        background-color: #f4f5f7;
 
         &:hover {
             background-color: #edf2f6e0;
@@ -127,9 +127,21 @@
         .account-name {
             margin: 0 6px;
             display: block;
-            text-align: center;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 500;
             flex: 1;
             color: var(--text-color);
+        }
+        .account-username {
+            margin: 0 6px;
+            display: block;
+            text-align: left;
+            font-size: 11px;
+            line-height: 13px;
+            // font-weight: 500;
+            flex: 1;
+            color: #555;
         }
         .account-avatar {
             width: 40px;

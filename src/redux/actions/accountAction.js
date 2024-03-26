@@ -11,14 +11,11 @@ const setCurrentUser = (value) => {
         value
     }
 }
-const getNewToken = () => {
+const getUserInfo = () => {
     
-    return {
-        type: ACTION_TYPE.GET_NEW_TOKEN,
-    }
 }
 export {
     setAccessToken,
     setCurrentUser,
-    getNewToken
+    getUserInfo
 }
