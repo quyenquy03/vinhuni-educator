@@ -74,7 +74,7 @@ function UserAccount() {
     const content = (
         <div className={cx('popover-content')}>
             <ul className={cx('account-menu')}>
-                <Link href={ROUTES.ADMIN_DASHBOARD} className={cx('menu-item')}>
+                <Link href={ROUTES.MY_PROFILE} className={cx('menu-item')}>
                     <span className={cx('menu-icon')}><FontAwesomeIcon icon={faLocationDot} /></span>
                     <span className={cx('menu-name')}>Trang cá nhân</span>
                 </Link>

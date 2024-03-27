@@ -2,6 +2,7 @@ const ROUTES = {
     HOMEPAGE : '/',
     LOGIN_PAGE: '/account/login',
     LOGIN_SSO: '/account/login-sso',
+    MY_PROFILE: '/my-profile',
     ADMIN_DASHBOARD: '/admin/dashboard',
     ADMIN_MANAGE_GENERAL: '/admin/manage-general',
     ADMIN_MANAGE_MAJOR: '/admin/manage-general/majors',
