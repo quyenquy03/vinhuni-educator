@@ -5,9 +5,10 @@ import style from './login.module.scss'
 import { usePathname, useRouter } from 'next/navigation';
 import ROUTES from '@/constants/routes';
 import { useDispatch } from 'react-redux';
-import { setAccessToken } from '@/redux/actions/accountAction';
+import { setAccessToken, setCurrentUser } from '@/redux/actions/accountAction';
 import http from '@/libs/http';
 import { useEffect, useState } from 'react';
+import { getCurrentUser } from '@/actions';
 const cx = classNames.bind(style)
 function FormLogin() {
     const router = useRouter();
@@ -32,10 +33,10 @@ function FormLogin() {
                     dispatch(setAccessToken(res.data.accessToken));
                     
                     const getUser = await getCurrentUser(res.data.accessToken);
+                    console.log(getUser)
                     if(getUser.statusCode == 200 && getUser.data) {
                         dispatch(setCurrentUser(getUser.data));
                     }
-
                     router.push(ROUTES.ADMIN_DASHBOARD);
                 } else {
                     message.error('Đăng nhập thất bại, vui lòng kiểm tra lại!')

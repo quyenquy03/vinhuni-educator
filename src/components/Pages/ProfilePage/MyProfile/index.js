@@ -75,7 +75,7 @@ const MyProfileComponent = () => {
                             ]}
                             name='userName'
                         >
-                            <Input className={cx('form-input')} placeholder="Tên tài khoản" />
+                            <Input disabled className={cx('form-input')} placeholder="Tên tài khoản" />
                         </Form.Item> 
 
                         <Form.Item className={cx('form-item')} label="Họ và tên" style={{marginBottom: 0}}>

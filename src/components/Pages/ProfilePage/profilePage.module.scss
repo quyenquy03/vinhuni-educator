@@ -30,7 +30,7 @@
     }
     .leftbox-username {
         font-size: 13px;
-        color: #555;
+        color: var(--text-color-blur);
     }
 
 }
@@ -44,7 +44,7 @@
         margin: 4px 2px;
         border-radius: 6px;
         background-color: var(--bg-color);
-        color: #555;
+        color: var(--text-color-blur);
         transition: .5 linear;
         &:hover,
         &.active {
@@ -93,7 +93,7 @@
     .form-input {
         padding: 10px !important;
         &:disabled{
-            color: #555 !important;
+            color: var(--text-color-blur) !important;
         }
     }
     .button-box {
