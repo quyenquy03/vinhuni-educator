@@ -9,6 +9,7 @@ import ROUTES from '@/constants/routes';
 import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { Skeleton } from 'antd';
+import UploadAvatar from './UploadAvatar';
 const cx = classNames.bind(style);
 
 const ProfileLeftbox = () => {
@@ -38,22 +39,7 @@ const ProfileLeftbox = () => {
                 {
                     currentUser?.id ? 
                     <>
-                        <div className={cx('leftbox-avatar')}>
-                            <Image
-                                alt="Logo"
-                                src={currentUser.avatar ?? "/user.png"}
-                                className={cx('avatar')}
-                                width={100}
-                                height={100}
-                            />
-                            <Image
-                                alt="camera"
-                                src="/camera.png"
-                                className={cx('camera-icon')}
-                                width={30}
-                                height={30}
-                            />
-                        </div>
+                        <UploadAvatar currentAvt={currentUser?.avatar} />
                         <h4 className={cx('leftbox-name')}>{`${currentUser.firstName} ${currentUser.lastName}`}</h4>
                         <span className={cx('leftbox-username')}>{currentUser?.userName}</span>
                     </> : 

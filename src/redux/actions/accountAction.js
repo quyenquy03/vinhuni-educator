@@ -11,11 +11,14 @@ const setCurrentUser = (value) => {
         value
     }
 }
-const getUserInfo = () => {
-    
+const fetchUserAvatar = (value) => {
+    return {
+        type: ACTION_TYPE.UPDATE_USER_AVATAR,
+        value
+    }
 }
 export {
     setAccessToken,
     setCurrentUser,
-    getUserInfo
+    fetchUserAvatar
 }

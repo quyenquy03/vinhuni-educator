@@ -30,6 +30,12 @@ function FormLogin() {
                 if(resFromNext.status == 200) {
                     message.success('Đăng nhập thành công');
                     dispatch(setAccessToken(res.data.accessToken));
+                    
+                    const getUser = await getCurrentUser(res.data.accessToken);
+                    if(getUser.statusCode == 200 && getUser.data) {
+                        dispatch(setCurrentUser(getUser.data));
+                    }
+
                     router.push(ROUTES.ADMIN_DASHBOARD);
                 } else {
                     message.error('Đăng nhập thất bại, vui lòng kiểm tra lại!')

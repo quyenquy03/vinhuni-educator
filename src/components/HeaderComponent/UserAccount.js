@@ -18,7 +18,7 @@ const cx = classNames.bind(style)
 
 function UserAccount() {
 
-    const {currentUser} = useSelector(state => state.accountReducer);
+    const {currentUser, accessToken} = useSelector(state => state.accountReducer);
     const [api, contextHolder] = notification.useNotification();
     const pathname = usePathname();
     const dispatch = useDispatch();
@@ -38,23 +38,6 @@ function UserAccount() {
             roles: currentUser?.roles
         })
     },[currentUser?.firstName, currentUser?.lastName, currentUser?.avatar, currentUser?.roles])
-    // useLayoutEffect(() => {
-    //     const fetchData = async() => {
-    //         if(accessToken) {
-    //             const res = await getCurrentUser(accessToken);
-    //             if(res.statusCode == 200 && res.data) {
-    //                 setCurrentAccount({
-    //                     fullName: `${res.data?.firstName} ${res.data?.lastName}`,
-    //                     avatar: res.data?.avatar ?? '/user.png',
-    //                     userName: res.data?.userName,
-    //                     roles: res.data?.roles
-    //                 })
-    //                 dispatch(setCurrentUser(res.data));
-    //             }
-    //         }
-    //     }
-    //     fetchData();
-    // }, [accessToken])
     useEffect(() => {
         setOpen(false);
     }, [pathname])

@@ -17,7 +17,14 @@ const accountReducer = (state = account, action) => {
                 ...state,
                 currentUser: action.value
             }
-
+        case ACTION_TYPE.UPDATE_USER_AVATAR:
+            return {
+                ...state,
+                currentUser: {
+                    ...state.currentUser,
+                    avatar: action.value
+                }
+            }
         default:
             return state;
     }

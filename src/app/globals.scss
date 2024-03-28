@@ -127,9 +127,16 @@ body::-webkit-scrollbar-thumb{
 .ant-picker-outlined {
   width: 100% !important;
 }
-.ant-radio-wrapper-disabled span {
+.custom-ant-picker .ant-picker-outlined input {
+  padding: 8px 0 !important;
+}
+.ant-radio-wrapper-disabled span,
+.ant-picker-disabled input {
   color: #555 !important;
 }
+
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -45,9 +45,27 @@ const updateProfile = async (data) => {
         }
     }
 }
+const updateAvatar = async (data) => {
+    try {
+        const res = await http.put('/account/change-avatar', {
+            imageURL : data
+        }, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        return res;
+    } catch(error) {
+        return {
+            status: 500,
+            message: 'Error from server'
+        }
+    }
+}
 
 export {
     logoutAccount,
     getCurrentUser,
+    updateAvatar,
     updateProfile
 }

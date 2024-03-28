@@ -12,7 +12,7 @@ function LoginPageComponent () {
                 <span>Chào mừng bạn đến với <span className={cx('highlight-title')}>Vinhuni Educator</span></span>
                 <Image
                     alt="Logo"
-                    src="/logo.png"
+                    src="/logo-test.png"
                     className={cx('logo')}
                     radius="full"
                     width={70}

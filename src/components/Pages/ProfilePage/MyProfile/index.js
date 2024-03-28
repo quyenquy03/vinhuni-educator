@@ -1,13 +1,12 @@
 'use client'
 import classNames from 'classnames/bind';
 import style from '../profilePage.module.scss'
-import { Button, DatePicker, Form, Input, Radio, message } from 'antd';
+import { Button, DatePicker, Form, Input, Radio, Skeleton, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLayoutEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { updateProfile } from '@/actions';
 import { setCurrentUser } from '@/redux/actions/accountAction';
-// import UploadAvatarComponent from '@/components/UploadAvatarComponent';
 
 const cx = classNames.bind(style)
 const MyProfileComponent = () => {
@@ -55,7 +54,6 @@ const MyProfileComponent = () => {
             <div className={cx('header-wrapper')}>
                 <span className={cx('header-title')}>Hồ sơ cá nhân</span>
             </div>
-            {/* <UploadAvatarComponent /> */}
             <div className={cx('body-wrapper')}>
                 {currentUser.id ? 
                     <Form
@@ -118,7 +116,7 @@ const MyProfileComponent = () => {
                                 </Radio.Group>
                             </Form.Item>
                         </Form.Item> 
-                        <Form.Item className={cx('form-item')} label="Ngày sinh" style={{marginBottom: 0}}>
+                        <Form.Item className={cx('form-item', 'custom-ant-picker')} label="Ngày sinh" style={{marginBottom: 0}}>
                             <Form.Item
                                 rules={[
                                     {
@@ -187,9 +185,15 @@ const MyProfileComponent = () => {
                         </div> 
                     </Form>
                     : 
-                    <>
-                        Skeleton
-                    </> 
+                    <div className={cx('skeleton-profile')}>
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                        <Skeleton.Input active block style={{height: '50px', margin: '10px 0'}} />
+                    </div>
                 }
             </div>
         </div>

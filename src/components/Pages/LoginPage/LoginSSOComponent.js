@@ -29,7 +29,7 @@ function LoginSSOComponent () {
                     <div className={cx('other-login-item')}>
                         <Image
                             alt="csv"
-                            src="/logo.png"
+                            src="/logo-test.png"
                             className={cx('other-login-logo')}
                             radius="full"
                             width={40}
