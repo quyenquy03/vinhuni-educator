@@ -1,6 +1,6 @@
 
 'use client'
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import style from './HeaderComponent.module.scss'
 import classNames from 'classnames/bind';
 import { Popover, Skeleton, message, notification } from 'antd';
@@ -11,15 +11,16 @@ import ROUTES from '@/constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '@/actions/accountActions';
 import { setAccessToken, setCurrentUser } from '@/redux/actions/accountAction';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { logoutBEServer, logoutNextServer } from '@/apiService';
 import Image from 'next/image';
 const cx = classNames.bind(style)
 
 function UserAccount() {
 
-    const {accessToken} = useSelector(state => state.accountReducer);
+    const {currentUser} = useSelector(state => state.accountReducer);
     const [api, contextHolder] = notification.useNotification();
+    const pathname = usePathname();
     const dispatch = useDispatch();
     const router = useRouter();
     const [open, setOpen] = useState(false);
@@ -29,23 +30,34 @@ function UserAccount() {
         userName: <Skeleton.Input style={{height: '11px'}} active={true} size={'small'} block={true} />,
         roles: ['Quản trị viên']
     });
-    useLayoutEffect(() => {
-        const fetchData = async() => {
-            if(accessToken) {
-                const res = await getCurrentUser(accessToken);
-                if(res.statusCode == 200 && res.data) {
-                    setCurrentAccount({
-                        fullName: `${res.data?.firstName} ${res.data?.lastName}`,
-                        avatar: res.data?.avatar ?? '/user.png',
-                        userName: res.data?.userName,
-                        roles: res.data?.roles
-                    })
-                    dispatch(setCurrentUser(res.data));
-                }
-            }
-        }
-        fetchData();
-    }, [accessToken])
+    useEffect(() => {
+        setCurrentAccount({
+            fullName: currentUser?.firstName ? `${currentUser?.firstName} ${currentUser?.lastName}` : <Skeleton.Input style={{height: '14px'}} active={true} size={'small'} block={true} />,
+            avatar: currentUser?.avatar ?? '/user.png',
+            userName: currentUser?.userName ?? <Skeleton.Input style={{height: '11px'}} active={true} size={'small'} block={true} />,
+            roles: currentUser?.roles
+        })
+    },[currentUser?.firstName, currentUser?.lastName, currentUser?.avatar, currentUser?.roles])
+    // useLayoutEffect(() => {
+    //     const fetchData = async() => {
+    //         if(accessToken) {
+    //             const res = await getCurrentUser(accessToken);
+    //             if(res.statusCode == 200 && res.data) {
+    //                 setCurrentAccount({
+    //                     fullName: `${res.data?.firstName} ${res.data?.lastName}`,
+    //                     avatar: res.data?.avatar ?? '/user.png',
+    //                     userName: res.data?.userName,
+    //                     roles: res.data?.roles
+    //                 })
+    //                 dispatch(setCurrentUser(res.data));
+    //             }
+    //         }
+    //     }
+    //     fetchData();
+    // }, [accessToken])
+    useEffect(() => {
+        setOpen(false);
+    }, [pathname])
 
     const handleOpenChange = (newOpen) => {
         setOpen(newOpen);

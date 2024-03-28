@@ -19,6 +19,22 @@ const getCurrentUser = async (accessToken) => {
         const res = await http.get('/account/me', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
+            },
+            next: {tags : ['fetch-current-user']}
+        })
+        return res;
+    } catch(error) {
+        return {
+            status: 500,
+            message: 'Error from server'
+        }
+    }
+}
+const updateProfile = async (data) => {
+    try {
+        const res = await http.put('/account/update-profile', data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
             }
         })
         return res;
@@ -28,10 +44,10 @@ const getCurrentUser = async (accessToken) => {
             message: 'Error from server'
         }
     }
-    
 }
 
 export {
     logoutAccount,
-    getCurrentUser
+    getCurrentUser,
+    updateProfile
 }

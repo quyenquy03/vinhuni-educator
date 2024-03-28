@@ -3,6 +3,9 @@ const ROUTES = {
     LOGIN_PAGE: '/account/login',
     LOGIN_SSO: '/account/login-sso',
     MY_PROFILE: '/my-profile',
+    CHANGE_PASSWORD: '/my-profile/password',
+    SETUP: '/my-profile/setup',
+
     ADMIN_DASHBOARD: '/admin/dashboard',
     ADMIN_MANAGE_GENERAL: '/admin/manage-general',
     ADMIN_MANAGE_MAJOR: '/admin/manage-general/majors',

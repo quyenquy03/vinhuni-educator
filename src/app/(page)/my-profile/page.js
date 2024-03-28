@@ -1,7 +1,9 @@
+import { MyProfileComponent } from "@/components/Pages/ProfilePage";
+
 const MyProfilePage = async () => {
     return (
         <>
-            My Profile
+            <MyProfileComponent />
         </>
     )
 }
